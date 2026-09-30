@@ -1,0 +1,34 @@
+# Sources and build config are not needed at runtime.
+src/**
+**/*.ts
+**/*.map
+tsconfig.json
+.gitignore
+.vscodeignore
+.vscode/**
+docs/**
+samples/**
+scripts/**
+AGENTS.md
+out/test/**
+*.vsix
+*.log
+
+# Python tests and caches; the worker scripts themselves are kept.
+python/tests/**
+python/**/__pycache__/**
+python/__pycache__/**
+**/__pycache__/**
+
+# Development-only dependencies.
+node_modules/.bin/**
+node_modules/@types/**
+node_modules/@vscode/**
+node_modules/mocha/**
+node_modules/typescript/**
+node_modules/.package-lock.json
+
+# Never ship voice models or audio.
+**/*.onnx
+**/*.onnx.json
+**/*.wav

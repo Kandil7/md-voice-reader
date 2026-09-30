@@ -1,0 +1,16 @@
+node_modules/
+out/
+*.vsix
+.vscode-test/
+*.log
+
+python/__pycache__/
+python/**/__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Never commit voice models or audio
+*.onnx
+*.onnx.json
+*.wav

@@ -1,0 +1,156 @@
+{
+  "name": "md-voice-reader",
+  "displayName": "MD Voice Reader",
+  "description": "Offline local text-to-speech for Markdown in VS Code, using Piper. Windows-first.",
+  "version": "0.1.0",
+  "publisher": "local-kandil",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": ">=18"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "tts",
+    "speech",
+    "piper",
+    "offline",
+    "accessibility"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:mdVoice.readSelection",
+    "onCommand:mdVoice.readParagraph",
+    "onCommand:mdVoice.readSlowly",
+    "onCommand:mdVoice.replay",
+    "onCommand:mdVoice.stop",
+    "onCommand:mdVoice.checkSetup"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "mdVoice.readSelection",
+        "title": "MD Voice: Read Selection"
+      },
+      {
+        "command": "mdVoice.readParagraph",
+        "title": "MD Voice: Read Paragraph"
+      },
+      {
+        "command": "mdVoice.readSlowly",
+        "title": "MD Voice: Read Slowly"
+      },
+      {
+        "command": "mdVoice.replay",
+        "title": "MD Voice: Replay"
+      },
+      {
+        "command": "mdVoice.stop",
+        "title": "MD Voice: Stop"
+      },
+      {
+        "command": "mdVoice.checkSetup",
+        "title": "MD Voice: Check Setup"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mdVoice.readSelection",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "editorTextFocus && editorLangId == markdown"
+      },
+      {
+        "command": "mdVoice.readParagraph",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p",
+        "when": "editorTextFocus && editorLangId == markdown"
+      },
+      {
+        "command": "mdVoice.readSlowly",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s",
+        "when": "editorTextFocus && editorLangId == markdown"
+      },
+      {
+        "command": "mdVoice.stop",
+        "key": "ctrl+alt+x",
+        "mac": "cmd+alt+x",
+        "when": "editorTextFocus && editorLangId == markdown"
+      }
+    ],
+    "configuration": {
+      "title": "MD Voice Reader",
+      "properties": {
+        "mdVoice.pythonPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "markdownDescription": "Absolute path to a **Windows** Python interpreter with `piper-tts` and `sounddevice` installed."
+        },
+        "mdVoice.modelPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "markdownDescription": "Absolute path to the Piper voice `.onnx` file. The matching `.onnx.json` must sit beside it."
+        },
+        "mdVoice.normalLengthScale": {
+          "type": "number",
+          "default": 1.0,
+          "minimum": 0.1,
+          "maximum": 5.0,
+          "scope": "application",
+          "markdownDescription": "Piper length scale for normal speech. Higher is slower."
+        },
+        "mdVoice.slowLengthScale": {
+          "type": "number",
+          "default": 1.5,
+          "minimum": 0.1,
+          "maximum": 5.0,
+          "scope": "application",
+          "markdownDescription": "Piper length scale for `Read Slowly`. Higher is slower."
+        },
+        "mdVoice.maxCharacters": {
+          "type": "number",
+          "default": 2000,
+          "minimum": 1,
+          "maximum": 100000,
+          "scope": "application",
+          "markdownDescription": "Maximum number of characters sent for synthesis in one request."
+        },
+        "mdVoice.readInlineCode": {
+          "type": "boolean",
+          "default": false,
+          "scope": "application",
+          "markdownDescription": "Read inline `code` spans. Fenced code blocks are always skipped."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && mocha \"out/test/**/*.test.js\"",
+    "package": "vsce package -o md-voice-reader.vsix",
+    "pytest": "python -m unittest discover -s python/tests -v"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "mocha": "^10.4.0",
+    "typescript": "^5.4.5"
+  }
+}

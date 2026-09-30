@@ -1,0 +1,6 @@
+# Runtime dependencies for the local worker.
+# Install with: uv pip install --python <venv-python> -r requirements.txt
+# Pin these after checking the installed versions on your machine.
+piper-tts
+sounddevice
+numpy
